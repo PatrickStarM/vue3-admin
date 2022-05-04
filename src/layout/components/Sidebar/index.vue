@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="logo-container">
-      <el-avatar size="44" shape="square" src="https://patrick-file.oss-cn-shanghai.aliyuncs.com/img/puff.png" />
+      <el-avatar
+        :size="logoHeight"
+        shape="square"
+        src="https://patrick-file.oss-cn-shanghai.aliyuncs.com/img/puff.png"
+      />
       <h1 class="logo-title" v-if="$store.getters.sidebarOpened">super-admin</h1>
     </div>
     <el-scrollbar>
@@ -13,11 +17,13 @@
 <script setup>
 import {} from 'vue'
 import SidebarMenu from './SidebarMenu'
+
+const logoHeight = 44
 </script>
 
 <style lang="scss" scoped>
 .logo-container {
-  height: 44px;
+  height: v-bind(logoHeight) + 'px';
   padding: 10px 0 22px 0;
   display: flex;
   align-items: center;
