@@ -6,7 +6,7 @@
         shape="square"
         src="https://patrick-file.oss-cn-shanghai.aliyuncs.com/img/puff.png"
       />
-      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">super-admin</h1>
+      <h1 class="logo-title" v-if="$store.getters.sidebarOpened">{{ $t('msg.test') }}</h1>
     </div>
     <el-scrollbar>
       <sidebar-menu></sidebar-menu>
