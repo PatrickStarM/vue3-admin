@@ -18,7 +18,7 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain'
 import {} from 'vue'
-import variables from '@/styles/variables.module.scss'
+// import variables from '@/styles/variables.module.scss'
 </script>
 
 <style lang="scss" scoped>
