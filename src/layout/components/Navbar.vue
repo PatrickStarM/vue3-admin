@@ -44,9 +44,11 @@ import ThemePicker from '@/components/ThemeSelect/index'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 import Guide from '@/components/Guide'
+import { resetRouter } from '@/router'
 
 const store = useStore()
 const logout = () => {
+  resetRouter()
   store.dispatch('user/logout')
 }
 
