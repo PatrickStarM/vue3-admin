@@ -16,7 +16,7 @@
 <script setup>
 import { roleList } from '@/api/role'
 import { watchSwitchLang } from '@/utils/i18n'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 const allRoles = ref([])
 const getRoleList = async () => {

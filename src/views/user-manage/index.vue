@@ -38,7 +38,9 @@
             <el-button type="primary" size="mini" @click="onShowClick(row._id)">
               {{ $t('msg.excel.show') }}
             </el-button>
-            <el-button type="info" size="mini">{{ $t('msg.excel.showRole') }}</el-button>
+            <el-button type="info" size="mini" @click="onShowRoleClick(row)">
+              {{ $t('msg.excel.showRole') }}
+            </el-button>
             <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{ $t('msg.excel.remove') }}</el-button>
           </template>
         </el-table-column>
@@ -58,22 +60,32 @@
     </el-card>
 
     <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
+    <roles-dialog v-model="roleDialogVisible" :userId="selectUserId" @updateRole="getListData"></roles-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import ExportToExcel from './components/Export2Excel.vue'
+import RolesDialog from './components/roles.vue'
+
+const roleDialogVisible = ref(false)
+
+// 保证每次打开重新获取用户角色数据
+watch(roleDialogVisible, (val) => {
+  if (!val) selectUserId.value = ''
+})
 
 // 数据相关
 const tableData = ref([])
 const total = ref(0)
 const page = ref(1)
 const size = ref(5)
+
 // 获取数据的方法
 const getListData = async () => {
   const result = await getUserManageList({
@@ -140,6 +152,16 @@ const onToExcelClick = () => {
  */
 const onShowClick = (id) => {
   router.push(`/user/info/${id}`)
+}
+
+/**
+ * 查看角色的点击事件
+ */
+
+const selectUserId = ref('')
+const onShowRoleClick = (row) => {
+  roleDialogVisible.value = true
+  selectUserId.value = row._id
 }
 </script>
 
