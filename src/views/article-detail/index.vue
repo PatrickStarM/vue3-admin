@@ -14,7 +14,6 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { articleDetail } from '@/api/article'
-
 // 获取数据
 const route = useRoute()
 const articleId = route.params.id
