@@ -40,10 +40,12 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue'
+import { ref, onActivated, onMounted } from 'vue'
 import { getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
+import { tableRef, initSortable } from './sortable'
+
 /**
  * size 改变触发
  */
@@ -80,6 +82,11 @@ getListData()
 watchSwitchLang(getListData)
 // 处理数据不重新加载的问题
 onActivated(getListData)
+
+// 表格拖拽相关
+onMounted(() => {
+  initSortable(tableData, getListData)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -104,6 +111,12 @@ onActivated(getListData)
   .pagination {
     margin-top: 20px;
     text-align: center;
+  }
+
+  ::v-deep(.sortable-ghost) {
+    opacity: 0.6;
+    color: #fff !important;
+    background: #304156 !important;
   }
 }
 </style>
